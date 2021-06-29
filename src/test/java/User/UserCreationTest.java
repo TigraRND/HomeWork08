@@ -6,19 +6,19 @@ import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import services.UserBuilder;
+import services.UserAPI;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
 public class UserCreationTest {
-    private UserBuilder userBuilder = new UserBuilder();
+    private UserAPI userAPI = new UserAPI();
 
     @Test
     public void checkUserCreation(){
         UserDTO user = UserDTO.builder()
-                .id(12001L)
-                .userStatus(01L)
+                .id(12001)
+                .userStatus(1)
                 .username("ALovi")
                 .password("Capitolka86")
                 .firstName("Andrew")
@@ -27,7 +27,7 @@ public class UserCreationTest {
                 .email("ALovi86@mail.ru")
                 .build();
 
-        Response response = userBuilder.createUser(user);
+        Response response = userAPI.createUser(user);
         response
                 .then()
                 .log().all()
@@ -41,8 +41,8 @@ public class UserCreationTest {
     @Test
     public void checkUserCreationJSONPath(){
         UserDTO user = UserDTO.builder()
-                .id(12001L)
-                .userStatus(01L)
+                .id(12001)
+                .userStatus(1)
                 .username("ALovi")
                 .password("Capitolka86")
                 .firstName("Andrew")
@@ -56,15 +56,15 @@ public class UserCreationTest {
 //        Assertions.assertEquals("12001", messageActual);
 
         Assertions.assertEquals("unknown",
-        userBuilder.createUser(user)
+        userAPI.createUser(user)
                 .jsonPath().get("type"));
     }
 
     @Test
     public void checkUserCreationResponseDTO(){
         UserDTO user = UserDTO.builder()
-                .id(12001L)
-                .userStatus(01L)
+                .id(12001)
+                .userStatus(1)
                 .username("ALovi")
                 .password("Capitolka86")
                 .firstName("Andrew")
@@ -73,7 +73,7 @@ public class UserCreationTest {
                 .email("ALovi86@mail.ru")
                 .build();
 
-        Response response = userBuilder.createUser(user);
+        Response response = userAPI.createUser(user);
         String messageActual = response.as(UserResponseDTO.class).getMessage();
         Assertions.assertEquals("12001", messageActual);
     }

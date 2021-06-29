@@ -11,8 +11,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 @JsonSerialize
 public class UserDTO {
 
-    private Long id;
-    private Long userStatus;
+    private int id;
+    private int userStatus;
     private String username;
     private String password;
     private String firstName;
