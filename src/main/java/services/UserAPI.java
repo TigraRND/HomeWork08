@@ -27,4 +27,13 @@ public class UserAPI {
                 .when()
                 .post(USER);
     }
+
+    public Response searchUserByName(String name){
+        return
+                given(spec)
+                    .with()
+                    .log().all()
+                .when()
+                .get(USER + "/" + name);
+    }
 }

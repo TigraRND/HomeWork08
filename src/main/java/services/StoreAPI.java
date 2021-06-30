@@ -28,4 +28,12 @@ public class StoreAPI {
                     .when()
                         .post(ORDER);
     }
+
+    public Response getInventory(){
+        return
+                given(spec)
+                    .when()
+                        .log().all()
+                        .get(INVENTORY);
+    }
 }
